@@ -1,11 +1,27 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
+import { downloadPDF } from '@/lib/pdfUtils'
 
 export default function ResumePage() {
   const { profile, bio, skills, experience, education } = portfolioData
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const handleDownloadPDF = async () => {
+    try {
+      setIsDownloading(true)
+      await downloadPDF() // Uses dynamic filename from profile
+    } catch (error) {
+      console.error('Failed to download PDF:', error)
+      // Fallback to API route
+      window.open('/api/resume', '_blank')
+    } finally {
+      setIsDownloading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-primary-900">
@@ -25,14 +41,14 @@ export default function ResumePage() {
               Download my resume or view it online. Always up-to-date with my latest experience and skills.
             </p>
             
-            <a
-              href={profile.resumePdf}
-              download
-              className="btn-primary"
+            <button
+              onClick={handleDownloadPDF}
+              disabled={isDownloading}
+              className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Download size={20} />
-              Download PDF
-            </a>
+              {isDownloading ? 'Generating PDF...' : 'Download PDF'}
+            </button>
           </motion.div>
         </div>
       </section>
@@ -253,14 +269,14 @@ export default function ResumePage() {
                 Interested in working together? Download my resume and let's connect!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href={profile.resumePdf}
-                  download
-                  className="btn-primary"
+                <button
+                  onClick={handleDownloadPDF}
+                  disabled={isDownloading}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download size={20} />
-                  Download PDF Resume
-                </a>
+                  {isDownloading ? 'Generating...' : 'Download PDF Resume'}
+                </button>
                 <a
                   href="/contact"
                   className="btn-secondary"

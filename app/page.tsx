@@ -1,14 +1,29 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
+import { downloadPDF } from '@/lib/pdfUtils'
 
 export default function HomePage() {
   const { profile, bio, skills, projects } = portfolioData
   const featuredProjects = projects.filter(project => project.featured).slice(0, 2)
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const handleQuickDownload = async () => {
+    try {
+      setIsDownloading(true)
+      await downloadPDF() // Uses dynamic filename from profile
+    } catch (error) {
+      console.error('Failed to download PDF:', error)
+      window.open('/api/resume', '_blank')
+    } finally {
+      setIsDownloading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-accent-50/30 dark:from-primary-900 dark:to-primary-800">
@@ -71,6 +86,14 @@ export default function HomePage() {
                   View Projects
                   <ArrowRight size={20} />
                 </Link>
+                <button
+                  onClick={handleQuickDownload}
+                  disabled={isDownloading}
+                  className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Download size={20} />
+                  {isDownloading ? 'Generating...' : 'Download Resume'}
+                </button>
                 <Link href="/contact" className="btn-secondary">
                   Get In Touch
                   <Mail size={20} />

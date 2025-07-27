@@ -238,7 +238,7 @@ export default function ContactPage() {
                       <div>
                         <label 
                           htmlFor="subject" 
-                          className="block text-sm font-medium text-primary-700 mb-2"
+                          className="block text-sm font-medium text-primary-700 dark:text-primary-300 mb-2"
                         >
                           Subject *
                         </label>
@@ -249,7 +249,7 @@ export default function ContactPage() {
                           value={formData.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-primary-300 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+                          className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-white dark:bg-primary-800 text-primary-900 dark:text-primary-100 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
                           placeholder="What's this about?"
                         />
                       </div>
@@ -257,7 +257,7 @@ export default function ContactPage() {
                       <div>
                         <label 
                           htmlFor="message" 
-                          className="block text-sm font-medium text-primary-700 mb-2"
+                          className="block text-sm font-medium text-primary-700 dark:text-primary-300 mb-2"
                         >
                           Message *
                         </label>

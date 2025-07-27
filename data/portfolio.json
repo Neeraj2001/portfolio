@@ -9,7 +9,7 @@
     "linkedin": "https://linkedin.com/in/alexjohnson",
     "github": "https://github.com/alexjohnson",
     "profileImage": "/images/profile.jpg",
-    "resumePdf": "/resume.pdf"
+    "resumePdf": "/api/resume"
   },
   "bio": {
     "summary": "Passionate software engineer with 4 years of experience building scalable web applications. I specialize in React, Node.js, and cloud technologies, with a proven track record of delivering high-quality solutions that drive business growth.",

@@ -236,7 +236,7 @@ export default function AboutPage() {
                   </div>
                   
                   <div>
-                    <h4 className="font-semibold text-primary-900 mb-2">Relevant Coursework:</h4>
+                    <h4 className="font-semibold text-primary-900 dark:text-primary-100 mb-2">Relevant Coursework:</h4>
                     <div className="flex flex-wrap gap-2">
                       {education.coursework.map((course) => (
                         <span

@@ -50,7 +50,7 @@ export default function Navigation() {
           <div className="md:hidden flex items-center space-x-2">
             <ThemeToggle />
             <button
-              className="p-2"
+              className="p-2 text-primary-900 dark:text-primary-100"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >

@@ -131,7 +131,19 @@ The design uses a custom color palette defined in `tailwind.config.js`. You can 
 - **Fonts**: Change font families in the config
 - **Animations**: Modify or add new animations
 
-### 5. Add Your Projects
+### 5. PDF Filename Generation
+
+The PDF resume filename is automatically generated from your profile name:
+- "Alex Johnson" → `Alex_Johnson_Resume.pdf`
+- "John Smith Jr." → `John_Smith_Jr_Resume.pdf`
+- "María García-López" → `Mara_GarcaLpez_Resume.pdf`
+
+This happens automatically when you update the `name` field in `portfolio.json`. The system:
+- Replaces spaces with underscores
+- Removes special characters for file compatibility
+- Appends "_Resume.pdf" to the end
+
+### 6. Add Your Projects
 
 Update the `projects` array in `portfolio.json`:
 
