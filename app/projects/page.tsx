@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Github, ExternalLink, Filter } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 import { cn } from '@/lib/utils'
@@ -9,6 +10,7 @@ import { cn } from '@/lib/utils'
 export default function ProjectsPage() {
   const { projects } = portfolioData
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   
   const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))]
   const filteredProjects = selectedCategory === 'All' 
@@ -19,6 +21,10 @@ export default function ProjectsPage() {
     'Completed': 'bg-green-100 text-green-700',
     'In Progress': 'bg-yellow-100 text-yellow-700',
     'Planning': 'bg-blue-100 text-blue-700'
+  }
+
+  const handleImageError = (projectId: string) => {
+    setImageErrors(prev => ({ ...prev, [projectId]: true }))
   }
 
   return (
@@ -94,10 +100,24 @@ export default function ProjectsPage() {
                 className="card group hover:shadow-xl transition-all duration-300"
               >
                 {/* Project Image */}
-                <div className="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg mb-6 flex items-center justify-center overflow-hidden">
-                  <span className="text-accent-600 text-lg font-semibold">
-                    {project.title}
-                  </span>
+                <div className="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg mb-6 overflow-hidden">
+                  {!imageErrors[project.id] && project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={600}
+                      height={338}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={() => handleImageError(project.id)}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-accent-600 text-lg font-semibold">
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <div className="p-6">
@@ -222,10 +242,24 @@ export default function ProjectsPage() {
                   <div className="card p-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                       {/* Project Image */}
-                      <div className="aspect-video bg-gradient-to-br from-accent-200 to-accent-300 rounded-lg flex items-center justify-center">
-                        <span className="text-accent-700 text-2xl font-bold">
-                          {project.title}
-                        </span>
+                      <div className="aspect-video bg-gradient-to-br from-accent-200 to-accent-300 rounded-lg overflow-hidden">
+                        {!imageErrors[project.id] && project.image ? (
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            width={600}
+                            height={338}
+                            className="w-full h-full object-cover"
+                            onError={() => handleImageError(project.id)}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-accent-700 text-2xl font-bold">
+                              {project.title}
+                            </span>
+                          </div>
+                        )}
                       </div>
                       
                       {/* Project Details */}

@@ -12,6 +12,8 @@ export default function HomePage() {
   const { profile, bio, skills, projects } = portfolioData
   const featuredProjects = projects.filter(project => project.featured).slice(0, 2)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [imageError, setImageError] = useState(false)
+  const [projectImageErrors, setProjectImageErrors] = useState<Record<string, boolean>>({})
 
   const handleQuickDownload = async () => {
     try {
@@ -23,6 +25,10 @@ export default function HomePage() {
     } finally {
       setIsDownloading(false)
     }
+  }
+
+  const handleProjectImageError = (projectId: string) => {
+    setProjectImageErrors(prev => ({ ...prev, [projectId]: true }))
   }
 
   return (
@@ -110,10 +116,21 @@ export default function HomePage() {
                 className="relative"
               >
                 <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-accent-400 to-accent-600">
-                  {/* Profile Image Placeholder */}
-                  <div className="w-full h-full flex items-center justify-center text-white text-6xl font-bold">
-                    {profile.name.split(' ').map(n => n[0]).join('')}
-                  </div>
+                  {!imageError && profile.profileImage ? (
+                    <Image
+                      src={profile.profileImage}
+                      alt={profile.name}
+                      width={320}
+                      height={320}
+                      className="w-full h-full object-cover"
+                      onError={() => setImageError(true)}
+                      priority
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white text-6xl font-bold">
+                      {profile.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                  )}
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent-500 rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-white text-sm font-bold">4+ YRS</span>
@@ -187,10 +204,23 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="card p-6 group hover:shadow-xl transition-all duration-300"
               >
-                <div className="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg mb-6 flex items-center justify-center">
-                  <span className="text-accent-600 text-lg font-semibold">
-                    {project.title}
-                  </span>
+                <div className="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg mb-6 overflow-hidden">
+                  {!projectImageErrors[project.id] && project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={600}
+                      height={338}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={() => handleProjectImageError(project.id)}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-accent-600 text-lg font-semibold">
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <h3 className="text-xl font-bold text-primary-900 dark:text-primary-100 mb-3">
