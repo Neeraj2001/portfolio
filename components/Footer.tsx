@@ -10,7 +10,7 @@ export default function Footer() {
     profile.github && { icon: Github, href: profile.github, label: 'GitHub' },
     profile.linkedin && { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
     profile.email && { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
-  ].filter(Boolean)
+  ].filter((link): link is { icon: any; href: string; label: string } => Boolean(link))
 
   return (
     <footer className="bg-primary-50 dark:bg-primary-900 border-t border-primary-200 dark:border-primary-700">
