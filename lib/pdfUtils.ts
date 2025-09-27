@@ -44,3 +44,27 @@ export const downloadPDF = async (customFilename?: string) => {
     throw error
   }
 }
+
+export const downloadStaticPDF = async () => {
+  try {
+    const { profile } = portfolioData
+    
+    if (!profile.resumeFile) {
+      throw new Error('Static resume file path not configured')
+    }
+    
+    // Create download link for static file
+    const link = document.createElement('a')
+    link.href = profile.resumeFile
+    link.download = generateFileName()
+    link.target = '_blank'
+    
+    // Trigger download
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (error) {
+    console.error('Error downloading static PDF:', error)
+    throw error
+  }
+}

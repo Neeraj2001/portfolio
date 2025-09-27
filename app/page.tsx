@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
-import { downloadPDF } from '@/lib/pdfUtils'
+import { downloadStaticPDF } from '@/lib/pdfUtils'
 
 export default function HomePage() {
   const { profile, bio, skills, projects } = portfolioData
@@ -16,7 +16,7 @@ export default function HomePage() {
   const handleQuickDownload = async () => {
     try {
       setIsDownloading(true)
-      await downloadPDF() // Uses dynamic filename from profile
+      await downloadStaticPDF() // Uses static PDF file from portfolio data
     } catch (error) {
       console.error('Failed to download PDF:', error)
       window.open('/api/resume', '_blank')
@@ -127,26 +127,32 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="flex space-x-4"
               >
-                <Link
-                  href={profile.github}
-                  target="_blank"
-                  className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
-                >
-                  <Github size={24} />
-                </Link>
-                <Link
-                  href={profile.linkedin}
-                  target="_blank"
-                  className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
-                >
-                  <Linkedin size={24} />
-                </Link>
-                <Link
-                  href={`mailto:${profile.email}`}
-                  className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
-                >
-                  <Mail size={24} />
-                </Link>
+                {profile.github && (
+                  <Link
+                    href={profile.github}
+                    target="_blank"
+                    className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
+                  >
+                    <Github size={24} />
+                  </Link>
+                )}
+                {profile.linkedin && (
+                  <Link
+                    href={profile.linkedin}
+                    target="_blank"
+                    className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
+                  >
+                    <Linkedin size={24} />
+                  </Link>
+                )}
+                {profile.email && (
+                  <Link
+                    href={`mailto:${profile.email}`}
+                    className="p-3 bg-white dark:bg-primary-800 rounded-full shadow-md hover:shadow-lg transition-shadow text-primary-600 dark:text-primary-300 hover:text-accent-600"
+                  >
+                    <Mail size={24} />
+                  </Link>
+                )}
               </motion.div>
             </div>
           </div>
@@ -207,14 +213,16 @@ export default function HomePage() {
                 </div>
                 
                 <div className="flex gap-4">
-                  <Link
-                    href={project.github}
-                    target="_blank"
-                    className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors flex items-center gap-1"
-                  >
-                    <Github size={16} />
-                    Code
-                  </Link>
+                  {project.github && (
+                    <Link
+                      href={project.github}
+                      target="_blank"
+                      className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors flex items-center gap-1"
+                    >
+                      <Github size={16} />
+                      Code
+                    </Link>
+                  )}
                   {project.demo && (
                     <Link
                       href={project.demo}

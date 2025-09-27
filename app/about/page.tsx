@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code, Database, Cloud, Users, Target, Coffee } from 'lucide-react'
+import { Code, Database, Cloud, Target, Coffee } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 export default function AboutPage() {
@@ -25,12 +25,6 @@ export default function AboutPage() {
       icon: Cloud,
       skills: [...skills.cloud, ...skills.tools],
       color: 'from-purple-500 to-purple-600'
-    },
-    {
-      title: 'Soft Skills',
-      icon: Users,
-      skills: skills.soft,
-      color: 'from-orange-500 to-orange-600'
     }
   ]
 
@@ -166,7 +160,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillCategories.map((category, index) => {
               const IconComponent = category.icon
               return (

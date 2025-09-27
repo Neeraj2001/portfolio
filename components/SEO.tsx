@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import portfolioData from '@/data/portfolio.json'
 
 interface SEOProps {
   title?: string
@@ -8,9 +9,9 @@ interface SEOProps {
 }
 
 const defaultMeta = {
-  title: 'Alex Johnson - Software Engineer',
-  description: 'Passionate software engineer with 4 years of experience building scalable web applications. Specializing in React, Node.js, and cloud technologies.',
-  url: 'https://alexjohnson.dev',
+  title: `${portfolioData.profile.name} - ${portfolioData.profile.title}`,
+  description: portfolioData.bio.summary,
+  url: portfolioData.profile.website,
   image: '/images/og-image.jpg'
 }
 
@@ -20,7 +21,7 @@ export default function SEO({
   url = defaultMeta.url,
   image = defaultMeta.image 
 }: SEOProps) {
-  const fullTitle = title === defaultMeta.title ? title : `${title} | Alex Johnson`
+  const fullTitle = title === defaultMeta.title ? title : `${title} | ${portfolioData.profile.name}`
 
   return (
     <Head>
@@ -43,7 +44,7 @@ export default function SEO({
       <meta name="twitter:image" content={image} />
       
       {/* Additional */}
-      <meta name="author" content="Alex Johnson" />
+      <meta name="author" content={portfolioData.profile.name} />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
     </Head>

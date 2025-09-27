@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import portfolioData from '@/data/portfolio.json'
 
 export const metadata: Metadata = {
-  title: 'Alex Johnson - Software Engineer',
-  description: 'Passionate software engineer with 4 years of experience building scalable web applications. Specializing in React, Node.js, and cloud technologies.',
+  title: `${portfolioData.profile.name} - ${portfolioData.profile.title}`,
+  description: portfolioData.bio.summary,
   keywords: ['Software Engineer', 'React', 'Node.js', 'TypeScript', 'Full Stack Developer'],
-  authors: [{ name: 'Alex Johnson' }],
+  authors: [{ name: portfolioData.profile.name }],
   viewport: 'width=device-width, initial-scale=1',
 }
 

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
-import { downloadPDF } from '@/lib/pdfUtils'
+import { downloadStaticPDF } from '@/lib/pdfUtils'
 
 export default function ResumePage() {
   const { profile, bio, skills, experience, education } = portfolioData
@@ -13,7 +13,7 @@ export default function ResumePage() {
   const handleDownloadPDF = async () => {
     try {
       setIsDownloading(true)
-      await downloadPDF() // Uses dynamic filename from profile
+      await downloadStaticPDF() // Uses static PDF file from portfolio data
     } catch (error) {
       console.error('Failed to download PDF:', error)
       // Fallback to API route
@@ -97,12 +97,16 @@ export default function ResumePage() {
                       <span className="text-sm">{profile.website}</span>
                     </div>
                     <div className="flex gap-4 lg:justify-end mt-4">
-                      <a href={profile.github} target="_blank" rel="noopener noreferrer">
-                        <Github size={20} className="hover:text-accent-300 transition-colors" />
-                      </a>
-                      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-                        <Linkedin size={20} className="hover:text-accent-300 transition-colors" />
-                      </a>
+                      {profile.github && (
+                        <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                          <Github size={20} className="hover:text-accent-300 transition-colors" />
+                        </a>
+                      )}
+                      {profile.linkedin && (
+                        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                          <Linkedin size={20} className="hover:text-accent-300 transition-colors" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

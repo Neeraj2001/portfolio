@@ -1,159 +1,104 @@
 {
   "profile": {
-    "name": "Alex Johnson",
-    "title": "Software Engineer",
-    "email": "alex.johnson@email.com",
-    "phone": "+1 (555) 123-4567",
-    "location": "San Francisco, CA",
-    "website": "https://alexjohnson.dev",
-    "linkedin": "https://linkedin.com/in/alexjohnson",
-    "github": "https://github.com/alexjohnson",
+    "name": "Lakshmi Neeraj Yelchuri",
+    "title": "Fullstack Software Engineer",
+    "email": "ylakshmineeraj@gmail.com",
+    "phone": "+91 9381164373",
+    "location": "Hyderabad, India",
+    "website": "https://neeraj2001.github.io/portfolio/resume",
+    "linkedin": "https://www.linkedin.com/in/lakshmi-neeraj-yelchuri/",
+    "github": "https://neeraj2001",
     "profileImage": "/images/profile.jpg",
-    "resumePdf": "/api/resume"
+    "resumePdf": "/api/resume",
+    "resumeFile": "/Lakshmi_Neeraj_Yelchuri_Resume.pdf"
   },
   "bio": {
-    "summary": "Passionate software engineer with 4 years of experience building scalable web applications. I specialize in React, Node.js, and cloud technologies, with a proven track record of delivering high-quality solutions that drive business growth.",
-    "longDescription": "I'm a dedicated software engineer who thrives on solving complex problems and building innovative solutions. My journey in tech began during my computer science studies, where I discovered my passion for full-stack development. Over the past 4 years, I've worked on diverse projects ranging from enterprise applications to modern web platforms, always focusing on clean code, user experience, and scalable architecture."
+    "summary": "Fullstack Software Engineer with 4+ years building scalable applications using React, Next.js, Node.js, and Express. Strong in REST/GraphQL API design, AWS (Lambda, S3, EC2, CloudWatch), and CI/CD automation. Proven impact on system optimization, developer productivity, and security through OAuth2/JWT authentication, role-based access, and performance tuning across frontend and backend layers.",
+    "longDescription": "I'm a dedicated fullstack software engineer with extensive experience in building scalable web applications and cloud solutions. My expertise spans across modern frontend frameworks, robust backend systems, and cloud infrastructure. I have a proven track record of optimizing systems, enhancing developer productivity, and implementing secure, scalable solutions that drive business growth."
   },
   "skills": {
-    "frontend": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"],
-    "backend": ["Node.js", "PostgreSQL", "Prismic", "Express.js", "RESTful APIs"],
-    "cloud": ["AWS", "Vercel", "Docker"],
-    "tools": ["Git", "DBeaver", "VS Code", "Figma", "Postman"],
-    "soft": ["Problem Solving", "Team Collaboration", "Project Management", "Mentoring", "Communication"]
+    "frontend": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Material-UI", "Responsive Design"],
+    "backend": ["Node.js", "Express", "REST APIs", "GraphQL", "PostgreSQL", "Postman"],
+    "cloud": ["AWS Lambda", "AWS S3", "AWS EC2", "AWS CloudWatch", "AWS CodePipeline", "AWS CodeBuild", "Docker"],
+    "tools": ["Git", "Azure DevOps", "Storybook", "Figma", "Postman"],
+    "soft": ["System Optimization", "Developer Productivity", "Security Implementation", "Team Collaboration", "API Design", "Performance Tuning"]
   },
   "experience": [
     {
       "id": "1",
       "position": "Software Engineer",
-      "company": "TechCorp Solutions",
-      "location": "San Francisco, CA",
+      "company": "SysCloud",
+      "location": "Hyderabad, India",
       "type": "Full-time",
-      "duration": "Jan 2022 - Present",
-      "description": "Lead development of customer-facing web applications serving 100k+ users. Implemented microservices architecture reducing load times by 40%.",
+      "duration": "Aug 2022 - Present",
+      "description": "Lead fullstack development with focus on system optimization, API design, and cloud infrastructure. Implemented security solutions and CI/CD automation.",
       "responsibilities": [
-        "Developed and maintained React-based web applications with TypeScript",
-        "Built scalable Node.js APIs with PostgreSQL database integration",
-        "Implemented CI/CD pipelines using AWS services",
-        "Mentored junior developers and conducted code reviews",
-        "Collaborated with design team to implement pixel-perfect UI components"
+        "Owned and refactored a core 'actions' module, reducing 55 files to 6 via JSON-driven class factory pattern; cut redundancy by 75% and boosted productivity",
+        "Designed and maintained REST and GraphQL APIs supporting backup, restore, and export; validated with Postman automated testing",
+        "Implemented payload compression/encryption across frontend/backend, ensuring security and scalability for large requests",
+        "Built an MSP Partner Portal with OAuth2, JWT, and RBAC for secure multi-tenant access",
+        "Developed serverless flows with AWS Lambda and managed assets in S3; deployed workloads on EC2 with monitoring in CloudWatch",
+        "Implemented AWS CI/CD pipelines (CodePipeline, CodeBuild) to automate testing/deployment; reduced release cycles by 40%",
+        "Integrated AI-assisted automation (Claude, Langflow) to accelerate debugging and reduce support dependency"
       ],
-      "technologies": ["React", "TypeScript", "Node.js", "PostgreSQL", "AWS", "Docker"]
+      "technologies": ["React", "Next.js", "Node.js", "Express", "GraphQL", "AWS Lambda", "AWS S3", "AWS EC2", "OAuth2", "JWT"]
     },
     {
       "id": "2",
-      "position": "Junior Software Engineer",
-      "company": "StartupXYZ",
-      "location": "San Francisco, CA",
-      "type": "Full-time",
-      "duration": "Jun 2021 - Dec 2021",
-      "description": "Contributed to early-stage startup's core platform development. Built features that helped acquire first 10k users.",
-      "responsibilities": [
-        "Developed responsive web components using React and CSS3",
-        "Integrated third-party APIs and payment processing systems",
-        "Optimized application performance and implemented lazy loading",
-        "Participated in agile development process and sprint planning"
-      ],
-      "technologies": ["React", "JavaScript", "Node.js", "Express.js", "MongoDB"]
-    },
-    {
-      "id": "3",
-      "position": "Software Engineering Intern",
-      "company": "InnovativeTech Inc",
-      "location": "Remote",
+      "position": "Software Engineer Intern",
+      "company": "SysCloud",
+      "location": "Chennai, India",
       "type": "Internship",
-      "duration": "May 2020 - Aug 2020",
-      "description": "Summer internship focused on frontend development and user experience improvements.",
+      "duration": "Sep 2021 - Aug 2022",
+      "description": "Developed internal MSP portal and worked on core product modules for backup and restore functionality.",
       "responsibilities": [
-        "Built interactive dashboard components using React",
-        "Improved application accessibility and mobile responsiveness",
-        "Created comprehensive documentation for component library",
-        "Assisted in user testing and gathering feedback"
+        "Built and maintained an internal MSP portal (20+ screens) with dashboards, login, and user/business management",
+        "Worked on core modules integrating product actions like Restore, Export, and Backup Now across backend APIs"
       ],
-      "technologies": ["React", "JavaScript", "HTML5", "CSS3", "Git"]
+      "technologies": ["React", "Node.js", "Express", "JavaScript", "REST APIs"]
     }
   ],
   "projects": [
     {
       "id": "1",
-      "title": "E-Commerce Platform",
-      "description": "Full-stack e-commerce solution with payment processing, inventory management, and admin dashboard. Built for scalability with microservices architecture.",
-      "longDescription": "A comprehensive e-commerce platform designed for modern retail needs. Features include real-time inventory tracking, secure payment processing via Stripe, order management system, and responsive design. The platform handles thousands of concurrent users and processes hundreds of orders daily.",
-      "technologies": ["Next.js", "TypeScript", "PostgreSQL", "Stripe API", "AWS", "Docker"],
+      "title": "Dematrix Website",
+      "description": "Client marketing site with Prismic CMS and responsive UI, optimized for SEO and performance.",
+      "longDescription": "A comprehensive marketing website built for a client using modern web technologies. Features include content management through Prismic CMS, responsive design with Tailwind CSS, and performance optimizations including WebP conversion, lazy loading, and bundle tuning for improved SEO rankings.",
+      "technologies": ["Next.js", "Prismic", "React", "Tailwind CSS"],
       "category": "Full-Stack",
-      "image": "/images/ecommerce-project.jpg",
-      "github": "https://github.com/alexjohnson/ecommerce-platform",
-      "demo": "https://ecommerce-demo.vercel.app",
+      "image": "/images/dematrix-project.jpg",
+      "demo": "https://dematrix.com",
       "featured": true,
-      "status": "Completed"
-    },
-    {
-      "id": "2",
-      "title": "Task Management App",
-      "description": "Collaborative task management application with real-time updates, team workspaces, and advanced filtering. Designed for remote teams.",
-      "longDescription": "A modern task management solution that helps teams stay organized and productive. Features include drag-and-drop task boards, real-time collaboration, deadline tracking, file attachments, and comprehensive reporting. Built with performance and user experience in mind.",
-      "technologies": ["React", "Node.js", "Socket.io", "MongoDB", "Tailwind CSS"],
-      "category": "Full-Stack",
-      "image": "/images/task-app-project.jpg",
-      "github": "https://github.com/alexjohnson/task-manager",
-      "demo": "https://taskapp-demo.netlify.app",
-      "featured": true,
-      "status": "Completed"
-    },
-    {
-      "id": "3",
-      "title": "Weather Dashboard",
-      "description": "Interactive weather dashboard with location-based forecasts, historical data visualization, and mobile-responsive design.",
-      "longDescription": "A comprehensive weather application that provides detailed forecasts, historical weather patterns, and interactive maps. Users can track multiple locations, receive weather alerts, and view detailed analytics about weather trends.",
-      "technologies": ["React", "D3.js", "OpenWeather API", "Chart.js", "CSS3"],
-      "category": "Frontend",
-      "image": "/images/weather-project.jpg",
-      "github": "https://github.com/alexjohnson/weather-dashboard",
-      "demo": "https://weather-dash-demo.netlify.app",
-      "featured": false,
-      "status": "Completed"
-    },
-    {
-      "id": "4",
-      "title": "API Gateway Service",
-      "description": "Microservices API gateway with authentication, rate limiting, and request routing. Built for enterprise-scale applications.",
-      "longDescription": "A robust API gateway solution designed to handle enterprise-level traffic. Includes features like JWT authentication, rate limiting, request/response transformation, monitoring, and analytics. Supports multiple backend services with intelligent load balancing.",
-      "technologies": ["Node.js", "Express.js", "Redis", "JWT", "Docker", "AWS"],
-      "category": "Backend",
-      "image": "/images/api-gateway-project.jpg",
-      "github": "https://github.com/alexjohnson/api-gateway",
-      "demo": null,
-      "featured": false,
-      "status": "In Progress"
+      "status": "Completed",
+      "year": "2025"
     }
   ],
   "contact": {
     "title": "Let's Build Something Amazing Together",
     "description": "I'm always interested in new opportunities and exciting projects. Whether you have a question, want to collaborate, or just want to say hello, I'd love to hear from you.",
-    "email": "alex.johnson@email.com",
+    "email": "ylakshmineeraj@gmail.com",
     "socialLinks": [
       {
         "platform": "LinkedIn",
-        "url": "https://linkedin.com/in/alexjohnson",
+        "url": "https://www.linkedin.com/in/lakshmi-neeraj-yelchuri/",
         "icon": "linkedin"
-      },
-      {
-        "platform": "GitHub",
-        "url": "https://github.com/alexjohnson",
-        "icon": "github"
-      },
-      {
-        "platform": "Twitter",
-        "url": "https://twitter.com/alexjohnson",
-        "icon": "twitter"
       }
     ]
   },
   "education": {
-    "degree": "Bachelor of Science in Computer Science",
-    "school": "University of California, Berkeley",
-    "duration": "2017 - 2021",
-    "gpa": "3.8/4.0",
-    "coursework": ["Data Structures & Algorithms", "Software Engineering", "Database Systems", "Web Development", "Computer Networks"]
-  }
+    "degree": "Bachelor of Technology in Computer Science (Honors)",
+    "school": "Lovely Professional University",
+    "location": "Punjab, India",
+    "duration": "2018 - 2022",
+    "gpa": "8.0/10",
+    "coursework": ["Computer Science", "Software Engineering", "System Design", "Data Structures & Algorithms", "Web Development"]
+  },
+  "certifications": [
+    {
+      "name": "AWS Certified Developer – Associate",
+      "issuer": "Amazon Web Services",
+      "status": "Candidate",
+      "year": "In Progress"
+    }
+  ]
 }

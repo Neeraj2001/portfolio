@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import ThemeToggle from './ThemeToggle'
+import portfolioData from '@/data/portfolio.json'
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -18,13 +19,19 @@ const navItems = [
 export default function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  
+  // Generate initials from name
+  const initials = portfolioData.profile.name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .join('')
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-primary-900/90 backdrop-blur-sm border-b border-primary-200 dark:border-primary-700 transition-colors">
       <div className="container">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-bold text-primary-900 dark:text-primary-100">
-            AJ
+            {initials}
           </Link>
 
           {/* Desktop Navigation */}

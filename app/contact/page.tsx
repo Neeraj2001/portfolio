@@ -14,6 +14,7 @@ export default function ContactPage() {
     message: ''
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -24,16 +25,49 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend or email service
-    // For demo purposes, we'll just show a success message
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
     
-    // Reset form after 3 seconds
+    // Basic validation
+    const { name, email, subject, message } = formData
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      alert('Please fill in all fields')
+      return
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address')
+      return
+    }
+    
+    setIsSubmitting(true)
+    
+    // Create mailto link with form data
+    const emailBody = `Hi ${profile.name},
+
+${message}
+
+---
+Best regards,
+${name}
+Email: ${email}`
+
+    const mailtoLink = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`
+    
+    // Small delay to show loading state
     setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 3000)
+      // Open default mail client
+      window.location.href = mailtoLink
+      
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      }, 3000)
+    }, 500)
   }
 
   const socialIcons = {
@@ -88,35 +122,39 @@ export default function ContactPage() {
 
                 {/* Contact Methods */}
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
-                      <Mail className="text-accent-600" size={20} />
+                  {profile.email && (
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                        <Mail className="text-accent-600" size={20} />
+                      </div>
+                      <div>
+                        <p className="font-medium text-primary-900 dark:text-primary-100">Email</p>
+                        <a 
+                          href={`mailto:${profile.email}`}
+                          className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors"
+                        >
+                          {profile.email}
+                        </a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-primary-900 dark:text-primary-100">Email</p>
-                      <a 
-                        href={`mailto:${profile.email}`}
-                        className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors"
-                      >
-                        {profile.email}
-                      </a>
-                    </div>
-                  </div>
+                  )}
 
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
-                      <Phone className="text-accent-600" size={20} />
+                  {profile.phone && (
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                        <Phone className="text-accent-600" size={20} />
+                      </div>
+                      <div>
+                        <p className="font-medium text-primary-900 dark:text-primary-100">Phone</p>
+                        <a 
+                          href={`tel:${profile.phone}`}
+                          className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors"
+                        >
+                          {profile.phone}
+                        </a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-primary-900 dark:text-primary-100">Phone</p>
-                      <a 
-                        href={`tel:${profile.phone}`}
-                        className="text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors"
-                      >
-                        {profile.phone}
-                      </a>
-                    </div>
-                  </div>
+                  )}
 
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
@@ -137,7 +175,7 @@ export default function ContactPage() {
                   <div className="flex gap-4">
                     {contact.socialLinks.map((social) => {
                       const IconComponent = socialIcons[social.icon as keyof typeof socialIcons]
-                      return (
+                      return social.url ? (
                         <a
                           key={social.platform}
                           href={social.url}
@@ -148,7 +186,7 @@ export default function ContactPage() {
                         >
                           <IconComponent size={20} />
                         </a>
-                      )
+                      ) : null
                     })}
                   </div>
                 </div>
@@ -194,7 +232,8 @@ export default function ContactPage() {
                       </p>
                     </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="relative group">
+                      <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <label 
@@ -210,7 +249,8 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-white dark:bg-primary-800 text-primary-900 dark:text-primary-100 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+                            disabled
+                            className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed"
                             placeholder="Your full name"
                           />
                         </div>
@@ -229,7 +269,8 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-white dark:bg-primary-800 text-primary-900 dark:text-primary-100 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+                            disabled
+                            className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed"
                             placeholder="your.email@example.com"
                           />
                         </div>
@@ -249,7 +290,8 @@ export default function ContactPage() {
                           value={formData.subject}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-white dark:bg-primary-800 text-primary-900 dark:text-primary-100 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+                          disabled
+                          className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed"
                           placeholder="What's this about?"
                         />
                       </div>
@@ -267,15 +309,17 @@ export default function ContactPage() {
                           value={formData.message}
                           onChange={handleChange}
                           required
+                          disabled
                           rows={6}
-                          className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-white dark:bg-primary-800 text-primary-900 dark:text-primary-100 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors resize-none"
+                          className="w-full px-4 py-3 border border-primary-300 dark:border-primary-600 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed resize-none"
                           placeholder="Tell me about your project, opportunity, or just say hello!"
                         />
                       </div>
 
                       <button
                         type="submit"
-                        className="w-full btn-primary justify-center"
+                        disabled
+                        className="w-full btn-primary justify-center opacity-50 cursor-not-allowed"
                       >
                         <Send size={20} />
                         Send Message
@@ -285,6 +329,14 @@ export default function ContactPage() {
                         By sending this message, you agree that I may contact you regarding your inquiry.
                       </p>
                     </form>
+                    
+                    {/* Tooltip */}
+                    <div className="absolute inset-0 bg-transparent cursor-not-allowed group-hover:bg-black/5 rounded-lg transition-colors flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/80 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-lg">
+                        Contact via mail: {profile.email}
+                      </div>
+                    </div>
+                  </div>
                   )}
                 </div>
               </motion.div>

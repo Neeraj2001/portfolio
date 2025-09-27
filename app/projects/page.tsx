@@ -145,15 +145,17 @@ export default function ProjectsPage() {
                   
                   {/* Actions */}
                   <div className="flex gap-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors text-sm font-medium"
-                    >
-                      <Github size={16} />
-                      Code
-                    </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-primary-600 dark:text-primary-300 hover:text-accent-600 transition-colors text-sm font-medium"
+                      >
+                        <Github size={16} />
+                        Code
+                      </a>
+                    )}
                     {project.demo && (
                       <a
                         href={project.demo}
@@ -248,15 +250,17 @@ export default function ProjectsPage() {
                         </div>
                         
                         <div className="flex gap-4">
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-primary"
-                          >
-                            <Github size={20} />
-                            View Code
-                          </a>
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-primary"
+                            >
+                              <Github size={20} />
+                              View Code
+                            </a>
+                          )}
                           {project.demo && (
                             <a
                               href={project.demo}

@@ -1,15 +1,16 @@
 import Link from 'next/link'
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import portfolioData from '@/data/portfolio.json'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const { profile } = portfolioData
   
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/alexjohnson', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/alexjohnson', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/alexjohnson', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:alex.johnson@email.com', label: 'Email' },
-  ]
+    profile.github && { icon: Github, href: profile.github, label: 'GitHub' },
+    profile.linkedin && { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
+    profile.email && { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
+  ].filter(Boolean)
 
   return (
     <footer className="bg-primary-50 dark:bg-primary-900 border-t border-primary-200 dark:border-primary-700">
@@ -17,7 +18,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           <div className="text-center md:text-left">
             <p className="text-primary-600 dark:text-primary-300 text-sm">
-              © {currentYear} Alex Johnson. All rights reserved.
+              © {currentYear} {profile.name}. All rights reserved.
             </p>
             <p className="text-primary-500 dark:text-primary-400 text-xs mt-1">
               Built with Next.js and Tailwind CSS
