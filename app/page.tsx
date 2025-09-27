@@ -125,6 +125,7 @@ export default function HomePage() {
                       className="w-full h-full object-cover"
                       onError={() => setImageError(true)}
                       priority
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-white text-6xl font-bold">
@@ -213,6 +214,7 @@ export default function HomePage() {
                       height={338}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={() => handleProjectImageError(project.id)}
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

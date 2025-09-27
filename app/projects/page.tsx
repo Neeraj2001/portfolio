@@ -110,6 +110,7 @@ export default function ProjectsPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={() => handleImageError(project.id)}
                       loading="lazy"
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
@@ -252,6 +253,7 @@ export default function ProjectsPage() {
                             className="w-full h-full object-cover"
                             onError={() => handleImageError(project.id)}
                             loading="lazy"
+                            unoptimized
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
