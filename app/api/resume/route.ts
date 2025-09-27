@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const nameForFile = profile.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '')
     const filename = `${nameForFile}_Resume.pdf`
     
-    return new NextResponse(stream as ReadableStream, {
+    return new NextResponse(stream as unknown as ReadableStream, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${filename}"`,
